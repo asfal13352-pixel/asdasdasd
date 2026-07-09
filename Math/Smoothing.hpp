@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector2.hpp"
+#include "Vector.hpp"
 #include "Random.hpp"
 
 // Asymmetric smoothing with micro-variation
