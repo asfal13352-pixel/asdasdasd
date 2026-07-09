@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.hpp"
-#include "../Math/Vector2.hpp"
+#include "../Math/Vector.hpp"
 #include "../Math/Bezier.hpp"
 #include "../Math/Smoothing.hpp"
 #include "../Shared/Config.hpp"

@@ -1,15 +1,17 @@
+#include <windows.h>
+#include <vector>
+#include <thread>
+
 #include "Memory.hpp"
-#include "../Math/Vector.hpp" // Or whichever file contains Vector2
 #include "Entity.hpp"
 #include "Aimbot.hpp"
 #include "Triggerbot.hpp"
-#include <windows.h>
 #include "ESP.hpp"
+
+#include "../Math/Vector.hpp"
 #include "../Shared/Config.hpp"
 #include "../Shared/SharedRenderData.hpp"
 #include "../Shared/IPCManager.hpp"
-#include <vector>
-#include <thread>
 
 const int screenW = GetSystemMetrics(SM_CXSCREEN);
 const int screenH = GetSystemMetrics(SM_CYSCREEN);
@@ -28,12 +30,12 @@ int main() {
         // Read entities
         for (int i = 0; i < MAX_PLAYERS; ++i) {
             uintptr_t entBase = 0; // Read from EntityList
-            ReadEntity(entBase, ents[i], mem, 0, SCREEN_W, SCREEN_H);
+            ReadEntity(entBase, ents[i], mem, 0, screenW, screenH);
         }
         // Aimbot
         int targetIdx = -1;
         Vector2 aimScreen;
-        if (aimbot.FindTarget(ents.data(), MAX_PLAYERS, localIdx, targetIdx, aimScreen, SCREEN_W, SCREEN_H)) {
+        if (aimbot.FindTarget(ents.data(), MAX_PLAYERS, localIdx, targetIdx, aimScreen, screenW, screenH)) {
             // Move mouse using SendInput (not implemented here)
         }
         // Triggerbot
@@ -41,7 +43,7 @@ int main() {
             // Fire using SendInput (not implemented here)
         }
         // ESP
-        FillESPData(ents.data(), MAX_PLAYERS, localIdx, renderData, SCREEN_W, SCREEN_H);
+        FillESPData(ents.data(), MAX_PLAYERS, localIdx, renderData, screenW, screenH);
         ipc.Write(renderData);
         std::this_thread::sleep_for(std::chrono::milliseconds(8));
     }
