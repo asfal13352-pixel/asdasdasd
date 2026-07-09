@@ -1,7 +1,9 @@
 #include "Memory.hpp"
+#include "../Math/Vector.hpp" // Or whichever file contains Vector2
 #include "Entity.hpp"
 #include "Aimbot.hpp"
 #include "Triggerbot.hpp"
+#include <windows.h>
 #include "ESP.hpp"
 #include "../Shared/Config.hpp"
 #include "../Shared/SharedRenderData.hpp"
@@ -9,9 +11,8 @@
 #include <vector>
 #include <thread>
 
-constexpr int MAX_PLAYERS = 64;
-constexpr int SCREEN_W = 1920;
-constexpr int SCREEN_H = 1080;
+const int screenW = GetSystemMetrics(SM_CXSCREEN);
+const int screenH = GetSystemMetrics(SM_CYSCREEN);
 
 int main() {
     Memory mem(L"cs2.exe");

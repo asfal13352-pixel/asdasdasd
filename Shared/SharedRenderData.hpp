@@ -3,7 +3,7 @@
 #include <array>
 #include "Config.hpp"
 
-constexpr int MAX_PLAYERS = 64;
+inline constexpr int MAX_PLAYERS = 64;
 constexpr int MAX_NAME_LEN = 32;
 constexpr int MAX_WEAPON_LEN = 32;
 
