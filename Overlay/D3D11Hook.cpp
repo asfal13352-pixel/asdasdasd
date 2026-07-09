@@ -1,24 +1,33 @@
 #include "D3D11Hook.hpp"
+
+// Standard & Windows Headers
+#include <windows.h>
 #include <d3d11.h>
 #include <dxgi.h>
-#include "../Shared/IPCManager.hpp"
-#include "../Shared/SharedRenderData.hpp"
-#include "../Shared/Config.hpp"
-#include "../Security/DynImport.hpp"
-#include "../Shared/ObfStr.hpp"
 #include <thread>
 #include <atomic>
-#include "MinHook.h"
+
+// Local Overlay Headers
 #include "imgui.h"
 #include "imgui_impl_dx11.h"
 #include "imgui_impl_win32.h"
+#include "MinHook.h"
 
+// Project Shared & Security
+#include "../Shared/IPCManager.hpp"
+#include "../Shared/SharedRenderData.hpp"
+#include "../Shared/Config.hpp"
+#include "../Shared/ObfStr.hpp"
+#include "../Security/DynImport.hpp"
+
+
+void RenderOverlay(IDXGISwapChain* pSwapChain);
+using Present_t = HRESULT(__stdcall*)(IDXGISwapChain*, UINT, UINT);
+static Present_t oPresent = nullptr;
+static IPCManager* g_ipc = nullptr;
 static std::atomic<bool> g_imguiInit{false};
 static SharedRenderData g_renderData{};
-static IPCManager* g_ipc = nullptr;
 
-using Present_t = HRESULT(__stdcall*)(IDXGISwapChain*, UINT, UINT);
-Present_t oPresent = nullptr;
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 

@@ -24,3 +24,4 @@ public:
 };
 
 #define OBF(str) (ObfStr<sizeof(str)>(str).Deobfuscate().c_str())
+#define OBFUSCATE(str) OBF(str) // 👈 ADD THIS LINE

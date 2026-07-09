@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <string>
 #include "../Shared/ObfStr.hpp"
+#include "DynImport.hpp"
 
 namespace Security {
     // Dynamically resolves an API from a module using obfuscated strings
