@@ -1,6 +1,7 @@
 #include "PEWiper.hpp"
 #include <winnt.h>
 #include <cstring>
+#include <cstdint>
 
 namespace Security {
 void ErasePEHeader(HMODULE hModule) {

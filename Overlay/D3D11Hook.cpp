@@ -9,9 +9,9 @@
 #include <thread>
 #include <atomic>
 #include "MinHook.h"
-#include <imgui.h>
-#include <imgui_impl_dx11.h>
-#include <imgui_impl_win32.h>
+#include "imgui.h"
+#include "imgui_impl_dx11.h"
+#include "imgui_impl_win32.h"
 
 static std::atomic<bool> g_imguiInit{false};
 static SharedRenderData g_renderData{};
